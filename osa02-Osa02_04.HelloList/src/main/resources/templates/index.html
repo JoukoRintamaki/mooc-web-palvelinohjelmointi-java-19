@@ -8,7 +8,9 @@
         <h1>Hello List!</h1>
 
         <!-- lisää toiminnallisuus listalla olevien arvojen listaamiseen tänne -->
-
+        <ul>
+            <li th:each="item: ${items}" th:text="${item}">Text here</li>
+        </ul>
 
         <!-- Älä koske alla olevaan lomakkeeseen, tutustumme 
         tiedon lisäämiseen hieman myöhemmin -->

@@ -8,8 +8,13 @@
         <h1>Items</h1>
 
         <!-- lisää toiminnallisuus listalla olevien esineiden listaamiseen -->
+        <ol>
+            <li th:each="item : ${items}">
+                <span th:text="${item.name}"/>                
+                (<span th:text="${item.type}"/>)                
+            </li>
+        </ol>
 
-        
         <!-- Älä koske alla olevaan lomakkeeseen, tutustumme 
         tiedon lisäämiseen hieman myöhemmin -->
         <h2>Add item</h2>

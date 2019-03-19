@@ -21,6 +21,7 @@ public class HelloListController {
 
     @GetMapping("/")
     public String home(Model model) {
+        model.addAttribute("items", list);
         return "index";
     }
 
