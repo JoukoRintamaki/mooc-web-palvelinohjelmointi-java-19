@@ -158,4 +158,13 @@ nbdist/
 # Ignore all local history of files
 .history
 
+# ### Database ###
+*.accdb
+*.db
+*.dbf
+*.mdb
+*.pdb
+*.sqlite3
+
+
 # End of https://www.gitignore.io/api/java,maven,linux,netbeans,jetbrains+all,visualstudiocode

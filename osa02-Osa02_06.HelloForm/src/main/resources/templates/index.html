@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title th:text="${content}">The data</title>
-    </head>
+<head>
+    <title th:text="${content}">The data</title>
+</head>
 
-    <body>
-        <h1 th:text="${content}">The data</h1>
+<body>
+<h1 th:text="${content}">The data</h1>
 
-        
-        <!-- toteuta tiedon lähettämiseen käytettävä lomake tänne -->
-        
-    </body>
+
+<!-- toteuta tiedon lähettämiseen käytettävä lomake tänne -->
+<form th:action="@{/}" method="post">
+    <input type="text" name="content"/>
+    <input type="submit"/>
+</form>
+
+</body>
 </html>
