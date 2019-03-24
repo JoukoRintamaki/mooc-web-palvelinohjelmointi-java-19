@@ -2,6 +2,7 @@ package hellopathvariables;
 
 import java.util.Map;
 import java.util.TreeMap;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,5 +31,12 @@ public class HelloPathVariablesController {
         model.addAttribute("item", this.items.get("default"));
         return "index";
     }
+
+    @GetMapping("/{id}")
+    public String home2(Model model, @PathVariable String id) {
+        model.addAttribute("item", this.items.get(id));
+        return "index";
+    }
+
 
 }
