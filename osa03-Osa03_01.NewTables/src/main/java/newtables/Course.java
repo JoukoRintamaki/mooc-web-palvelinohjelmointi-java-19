@@ -1,7 +1,8 @@
-package airports;
+package newtables;
 
+import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,9 +13,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Aircraft extends AbstractPersistable<Long> {
-
-    private String name;
-    @ManyToOne
-    private Airport airport;
+public class Course extends AbstractPersistable<Long> {
+    String name;
+    @ManyToMany(mappedBy = "enrollments")
+    List<Student> students;
 }

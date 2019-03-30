@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -13,6 +14,9 @@ public class AirportController {
 
     @Autowired
     private AirportRepository airportRepository;
+
+    @Autowired
+    private AircraftRepository aircraftRepository;
 
     @GetMapping("/airports")
     public String list(Model model) {
@@ -28,5 +32,16 @@ public class AirportController {
 
         airportRepository.save(a);
         return "redirect:/airports";
+    }
+
+    @PostMapping("/aircrafts/{aircraftId}/airports")
+    public String assignAirport(@PathVariable Long aircraftId, @RequestParam Long airportId){
+        Airport airport = airportRepository.getOne(airportId);
+        Aircraft aircraft = aircraftRepository.getOne(aircraftId);
+        airport.getAircrafts().add(aircraft);
+        airportRepository.save(airport);
+        aircraft.setAirport(airport);
+        aircraftRepository.save(aircraft);
+        return "redirect:/aircrafts";
     }
 }
