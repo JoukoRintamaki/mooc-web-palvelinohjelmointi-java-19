@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.transaction.Transactional;
+
 @Controller
 public class AccountController {
 
@@ -19,6 +21,7 @@ public class AccountController {
         return "index";
     }
 
+    @Transactional
     @PostMapping("/")
     public String transfer(@RequestParam String from, @RequestParam String to, @RequestParam Integer amount) {
         Account accountFrom = this.accountRepository.findByIban(from);
@@ -29,7 +32,7 @@ public class AccountController {
 
         this.accountRepository.save(accountFrom);
         this.accountRepository.save(accountTo);
-        
+
         return "redirect:/";
     }
 }
