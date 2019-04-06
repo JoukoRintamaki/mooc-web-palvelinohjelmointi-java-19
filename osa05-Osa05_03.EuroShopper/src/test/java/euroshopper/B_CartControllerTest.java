@@ -3,20 +3,18 @@ package euroshopper;
 import fi.helsinki.cs.tmc.edutestutils.Points;
 import java.util.Map;
 import java.util.UUID;
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -27,13 +25,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@AutoConfigureMockMvc
 @Points("05-03.2")
 @ActiveProfiles("test")
 public class B_CartControllerTest {
 
-    @Autowired
-    private WebApplicationContext webAppContext;
-    
     @Autowired
     private ListableBeanFactory listableBeanFactory;
 
@@ -43,12 +39,8 @@ public class B_CartControllerTest {
     @Autowired
     private ItemRepository itemRepository;
 
+    @Autowired
     private MockMvc mockMvc;
-
-    @Before
-    public void setUp() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
-    }
 
     @Test
     public void shoppingCartLoadedAsBean() {

@@ -6,21 +6,19 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -31,14 +29,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Points("05-03.3")
+@AutoConfigureMockMvc
 @ActiveProfiles("test")
 public class C_OrderServiceTest {
 
     private static final boolean WITH_SESSION = true;
     private static final boolean WITHOUT_SESSION = false;
-
-    @Autowired
-    private WebApplicationContext webAppContext;
 
     @Autowired
     private MockHttpSession mockSession;
@@ -49,12 +45,8 @@ public class C_OrderServiceTest {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
     private MockMvc mockMvc;
-
-    @Before
-    public void setUp() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
-    }
 
     @Test
     public void itemsThatHaveBeenAddedToCartAreOrdered() throws Exception {
@@ -132,7 +124,7 @@ public class C_OrderServiceTest {
                 .findAll()
                 .stream()
                 .filter(o -> o.getName().equals(name) && o.getAddress().equals(address) && o.getOrderItems() != null && o.getOrderItems()
-                        .stream().filter(i -> i.getItem() != null && i.getItem().getId() != null && itemName.equals(i.getItem().getName()) && itemCount.equals(i.getItemCount())).count() > 0)
+                .stream().filter(i -> i.getItem() != null && i.getItem().getId() != null && itemName.equals(i.getItem().getName()) && itemCount.equals(i.getItemCount())).count() > 0)
                 .collect(Collectors.toList());
     }
 
