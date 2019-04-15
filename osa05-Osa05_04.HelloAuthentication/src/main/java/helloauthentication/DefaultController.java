@@ -1,4 +1,4 @@
-package helloauthentication;
+    package helloauthentication;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

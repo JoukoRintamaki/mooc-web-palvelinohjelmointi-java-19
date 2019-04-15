@@ -16,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -26,14 +28,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/h2-console", "/h2-console/**").permitAll()
+                .antMatchers("/accounts","/accounts/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/").permitAll()
                 .antMatchers(HttpMethod.GET, "/reservations").permitAll()
-                .antMatchers(HttpMethod.POST, "/reservations").hasAnyRole()
+                .antMatchers(HttpMethod.POST, "/reservations").authenticated()
                 .anyRequest().authenticated();
         http.formLogin()
                 .permitAll();
     }
 
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
