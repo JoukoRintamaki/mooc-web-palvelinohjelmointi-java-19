@@ -166,5 +166,6 @@ nbdist/
 *.pdb
 *.sqlite3
 
-
+.tmc.json
+tmc-langs.log
 # End of https://www.gitignore.io/api/java,maven,linux,netbeans,jetbrains+all,visualstudiocode
