@@ -1,17 +1,15 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Playlist service</title>
-    </head>
-    <body>
-        <header th:replace="fragments/layout :: header">
-            <p>menu</p>
-        </header>
+<head th:replace="fragments/layout::head(title='Playlist service')"/>
 
-        <main>
-            <p>Welcome!</p>
-        </main>
+<body>
+<header th:replace="fragments/layout :: header">
+    <p>menu</p>
+</header>
 
-    </body>
+<main>
+    <p>Welcome!</p>
+</main>
+
+</body>
 </html>
